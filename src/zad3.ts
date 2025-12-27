@@ -1,13 +1,13 @@
 type ApiResponse<T> = {
-    data?: T,
+    data?: T | null,
     error?: {
         message:string,
     }
 }
 
 type BlogPost = {
-    title?: string,
-    body?: string,
+    title?: string | null,
+    body?: string | null,
     author?: {
         name: string,
         surname: string,
@@ -36,6 +36,9 @@ function processBlogPost(apiResponse:ApiResponse<BlogPost[]>) {
             console.log(post.author.surname)
             console.log(post.author.age)
         }
+        else {
+            console.log("Brak danych")
+        }
         console.log("Tytuł: " + (post.title || "Brak danych"));
         console.log("Treść: " + (post.body || "Brak danych"));
         console.log("Komentarze: " + (post.comments || "Brak danych"));
@@ -61,7 +64,7 @@ let r1: ApiResponse<BlogPost[]> = {
 }
 let r2: ApiResponse<BlogPost[]> = {}
 let r3: ApiResponse<BlogPost[]> = {
-    data:[],
+    data: null,
     error: {
         message: "sbandfbsalfs"
     }
